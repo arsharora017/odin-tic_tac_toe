@@ -78,11 +78,25 @@ const Game = (() => {
     }
   };
 
+  const restart = () => {
+    for (let i = 0; i < 9; i++) {
+      //using update fn to place empty string at all index positions (squares)
+      Gameboard.update(i, "");
+      Gameboard.render();
+    }
+  };
+
   return {
     start,
     handleClick,
+    restart,
   };
 })();
+
+const restartButton = document.querySelector("#restart-button");
+restartButton.addEventListener("click", () => {
+  Game.restart();
+});
 
 const startButton = document.querySelector("#start-button");
 startButton.addEventListener("click", () => {
