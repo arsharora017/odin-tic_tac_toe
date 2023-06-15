@@ -21,9 +21,17 @@ const Gameboard = (() => {
     render();
   };
 
+  //   way to see within the gameboard what is inside of gameboard
+  //but we don't want to access it directly
+  //we create function which is called accessor fn(cannot modify our array)
+  //resposibility is to only give access to gameboard without directly
+  //sending gameboard to the exterior of Gameboard
+  const getGameboard = () => gameboard;
+
   return {
     render,
     update,
+    getGameboard,
   };
 })();
 
@@ -55,6 +63,12 @@ const Game = (() => {
   //   click squares to mark X or O
   const handleClick = (event) => {
     let index = parseInt(event.target.id.slice(-1));
+
+    console.log(Gameboard.getGameboard());
+
+    // to check if the square is empty
+    if (Gameboard.getGameboard()[index] !== "") return;
+
     Gameboard.update(index, player[currentPlayerIndex].mark);
 
     if (currentPlayerIndex === 0) {
