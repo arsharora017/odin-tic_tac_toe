@@ -1,5 +1,7 @@
 :root {
   /* background-color: black; */
+  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 h1 {
@@ -17,6 +19,10 @@ h1 {
 
 .square {
   border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
 }
 
 #controls,

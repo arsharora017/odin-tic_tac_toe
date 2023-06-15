@@ -13,16 +13,21 @@ const Gameboard = (() => {
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
       square.addEventListener("click", Game.handleClick);
-      //   console.log(square);
     });
+  };
+
+  const update = (index, value) => {
+    gameboard[index] = value;
+    render();
   };
 
   return {
     render,
+    update,
   };
 })();
 
-// create factory fn fo, if you need multiple of something
+// create factory fn, if you need multiple of something
 // like player
 const createPlayer = (name, mark) => {
   return {
@@ -47,9 +52,16 @@ const Game = (() => {
     Gameboard.render();
   };
 
+  //   click squares to mark X or O
   const handleClick = (event) => {
-    let index = event.target.id.slice(-1);
-    console.log(index);
+    let index = parseInt(event.target.id.slice(-1));
+    Gameboard.update(index, player[currentPlayerIndex].mark);
+
+    if (currentPlayerIndex === 0) {
+      currentPlayerIndex = 1;
+    } else {
+      currentPlayerIndex = 0;
+    }
   };
 
   return {
