@@ -1,0 +1,26 @@
+:root {
+  /* background-color: black; */
+}
+
+h1 {
+  color: green;
+}
+
+#gameboard {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  justify-content: center;
+  /* height: 200px; */
+  margin: 30px 0;
+}
+
+.square {
+  border: 1px solid black;
+}
+
+#controls,
+#message {
+  text-align: center;
+  margin: 20px 0;
+}
