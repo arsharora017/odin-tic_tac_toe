@@ -64,8 +64,6 @@ const Game = (() => {
   const handleClick = (event) => {
     let index = parseInt(event.target.id.slice(-1));
 
-    console.log(Gameboard.getGameboard());
-
     // to check if the square is empty
     if (Gameboard.getGameboard()[index] !== "") return;
 
@@ -92,6 +90,8 @@ const Game = (() => {
     restart,
   };
 })();
+
+//Gameboard.render();
 
 const restartButton = document.querySelector("#restart-button");
 restartButton.addEventListener("click", () => {
