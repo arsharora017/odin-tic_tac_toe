@@ -3,6 +3,7 @@
 const Gameboard = (() => {
   let gameboard = ["", "", "", "", "", "", "", "", ""];
 
+  //renders squares of game board
   const render = () => {
     let boardHTMl = "";
     gameboard.forEach((square, index) => {
@@ -10,6 +11,12 @@ const Gameboard = (() => {
     });
 
     document.querySelector("#gameboard").innerHTML = boardHTMl;
+  };
+
+  render();
+
+  //listens to click on game board squares
+  const clickListener = () => {
     const squares = document.querySelectorAll(".square");
     squares.forEach((square) => {
       square.addEventListener("click", Game.handleClick);
@@ -19,6 +26,7 @@ const Gameboard = (() => {
   const update = (index, value) => {
     gameboard[index] = value;
     render();
+    clickListener();
   };
 
   //   way to see within the gameboard what is inside of gameboard
@@ -30,6 +38,7 @@ const Gameboard = (() => {
 
   return {
     render,
+    clickListener,
     update,
     getGameboard,
   };
@@ -58,6 +67,7 @@ const Game = (() => {
     currentPlayerIndex = 0;
     gameOver = false;
     Gameboard.render();
+    Gameboard.clickListener();
   };
 
   //   click squares to mark X or O
