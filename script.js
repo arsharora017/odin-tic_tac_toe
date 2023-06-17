@@ -64,6 +64,8 @@ const Game = (() => {
       createPlayer(document.querySelector("#player1").value, "X"),
       createPlayer(document.querySelector("#player2").value, "O"),
     ];
+
+    console.log(player[1]);
     currentPlayerIndex = 0;
     gameOver = false;
     Gameboard.render();
@@ -79,6 +81,16 @@ const Game = (() => {
 
     Gameboard.update(index, player[currentPlayerIndex].mark);
 
+    if (
+      checkForWin(Gameboard.getGameboard(), player[currentPlayerIndex].mark)
+    ) {
+      gameOver = true;
+      alert(`${player[currentPlayerIndex].name} won!`);
+    } else if (checkForTie(Gameboard.getGameboard())) {
+      gameOver = true;
+      alert("it's a tie");
+    }
+
     if (currentPlayerIndex === 0) {
       currentPlayerIndex = 1;
     } else {
@@ -91,6 +103,7 @@ const Game = (() => {
       //using update fn to place empty string at all index positions (squares)
       Gameboard.update(i, "");
       Gameboard.render();
+      Gameboard.clickListener();
     }
   };
 
@@ -98,10 +111,9 @@ const Game = (() => {
     start,
     handleClick,
     restart,
+    gameOver,
   };
 })();
-
-//Gameboard.render();
 
 const restartButton = document.querySelector("#restart-button");
 restartButton.addEventListener("click", () => {
@@ -112,3 +124,30 @@ const startButton = document.querySelector("#start-button");
 startButton.addEventListener("click", () => {
   Game.start();
 });
+
+//deciding winner
+
+function checkForWin(board) {
+  const winningCombinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  for (let i = 0; i < winningCombinations.length; i++) {
+    const [a, b, c] = winningCombinations[i];
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function checkForTie(board) {
+  return board.every((cell) => cell !== "");
+}
