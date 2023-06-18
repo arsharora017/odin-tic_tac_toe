@@ -1,3 +1,6 @@
+const result = document.querySelector(".result");
+const modal = document.querySelector(".modal");
+
 //create module for the game board
 
 const Gameboard = (() => {
@@ -65,7 +68,6 @@ const Game = (() => {
       createPlayer(document.querySelector("#player2").value, "O"),
     ];
 
-    console.log(player[1]);
     currentPlayerIndex = 0;
     gameOver = false;
     Gameboard.render();
@@ -74,6 +76,10 @@ const Game = (() => {
 
   //   click squares to mark X or O
   const handleClick = (event) => {
+    if (gameOver) {
+      return;
+    }
+
     let index = parseInt(event.target.id.slice(-1));
 
     // to check if the square is empty
@@ -81,14 +87,16 @@ const Game = (() => {
 
     Gameboard.update(index, player[currentPlayerIndex].mark);
 
+    //display result -> modal
+
     if (
       checkForWin(Gameboard.getGameboard(), player[currentPlayerIndex].mark)
     ) {
       gameOver = true;
-      alert(`${player[currentPlayerIndex].name} won!`);
+      result.textContent = `${player[currentPlayerIndex].name} won!`;
     } else if (checkForTie(Gameboard.getGameboard())) {
       gameOver = true;
-      alert("it's a tie");
+      result.textContent = "It's a tie!";
     }
 
     if (currentPlayerIndex === 0) {
@@ -98,26 +106,35 @@ const Game = (() => {
     }
   };
 
+  //close modal
+
   const restart = () => {
     for (let i = 0; i < 9; i++) {
       //using update fn to place empty string at all index positions (squares)
       Gameboard.update(i, "");
       Gameboard.render();
       Gameboard.clickListener();
+      gameOver = false; //to fix the issue where we unable to click squares after restarting
     }
+  };
+
+  const resetResults = () => {
+    result.textContent = "";
+    modal.style.display = "none";
   };
 
   return {
     start,
     handleClick,
     restart,
-    gameOver,
+    resetResults,
   };
 })();
 
 const restartButton = document.querySelector("#restart-button");
 restartButton.addEventListener("click", () => {
   Game.restart();
+  Game.resetResults();
 });
 
 const startButton = document.querySelector("#start-button");

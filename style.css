@@ -27,7 +27,7 @@
 }
 
 .square {
-  border: 1px solid black;
+  border: 2px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,4 +39,28 @@
 #message {
   text-align: center;
   margin: 20px 0;
+}
+
+/* modal */
+
+.modal {
+  display: flex; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 40vh;
+  width: 100%; /* Full width */
+  overflow: auto; /* Enable scroll if needed */
+  height: fit-content;
+  font-size: max(5vh, 20px);
+}
+
+.modal-content {
+  background-color: rgba(101, 255, 191, 0.164);
+  text-align: center;
+  width: 100%; /* Could be more or less, depending on screen size */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: thin;
+  color: #fff;
+  text-shadow: 0 0 7px #5271ff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #5271ff;
 }
