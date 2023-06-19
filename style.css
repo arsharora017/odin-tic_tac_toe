@@ -10,12 +10,6 @@
   --border-radius: 4px;
 }
 
-/* h1 {
-  color: green;
-  text-align: center;
-  font-size: 4rem;
-} */
-
 .title {
   color: var(--secondary-color);
   text-align: center;
@@ -42,8 +36,7 @@
   color: var(--color-1);
 }
 
-#controls,
-#message {
+#controls {
   text-align: center;
   margin: 20px 0;
   display: flex;
@@ -68,7 +61,7 @@ input::placeholder {
   color: rgb(208, 206, 206);
 }
 
-button {
+.btn {
   cursor: pointer;
   padding: 0.65rem;
   text-align: center;
@@ -78,6 +71,7 @@ button {
   border-radius: var(--border-radius);
   font-size: var(--font-size);
   border: none;
+  width: 130px;
 }
 /* modal */
 
@@ -105,4 +99,26 @@ button {
 
 .result {
   font-size: 5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  #gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    justify-content: center;
+    margin: 5rem 0;
+  }
+
+  .square {
+    font-size: 5rem;
+  }
+
+  #controls {
+    flex-wrap: wrap;
+  }
+
+  input[type="text"] {
+    width: 300px;
+  }
 }

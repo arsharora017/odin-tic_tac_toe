@@ -1,5 +1,6 @@
-const result = document.querySelector(".result");
+const message = document.querySelector(".message");
 const modal = document.querySelector(".modal");
+const gBoard = document.querySelector("#gameboard");
 
 //create module for the game board
 
@@ -87,16 +88,16 @@ const Game = (() => {
 
     Gameboard.update(index, player[currentPlayerIndex].mark);
 
-    //display result -> modal
+    //display message -> modal
 
     if (
       checkForWin(Gameboard.getGameboard(), player[currentPlayerIndex].mark)
     ) {
       gameOver = true;
-      result.textContent = `${player[currentPlayerIndex].name} won!`;
+      message.textContent = `${player[currentPlayerIndex].name} won!`;
     } else if (checkForTie(Gameboard.getGameboard())) {
       gameOver = true;
-      result.textContent = "It's a tie!";
+      message.textContent = "It's a tie!";
     }
 
     if (currentPlayerIndex === 0) {
@@ -119,8 +120,7 @@ const Game = (() => {
   };
 
   const resetResults = () => {
-    result.textContent = "";
-    modal.style.display = "none";
+    message.textContent = "";
   };
 
   return {
@@ -137,8 +137,9 @@ restartButton.addEventListener("click", () => {
   Game.resetResults();
 });
 
+let clicked = false;
 const startButton = document.querySelector("#start-button");
-startButton.addEventListener("click", () => {
+startButton.addEventListener("click", (event) => {
   Game.start();
 });
 
