@@ -107,7 +107,7 @@ input::placeholder {
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
     justify-content: center;
-    margin: 5rem 0;
+    margin: 1.7rem 0;
   }
 
   .square {
@@ -119,6 +119,6 @@ input::placeholder {
   }
 
   input[type="text"] {
-    width: 300px;
+    width: 290px;
   }
 }
